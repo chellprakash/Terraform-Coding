@@ -1,0 +1,71 @@
+Server creation code:
+-------------------------------------------------------------------------
+MAIN.TF--MAIN CODE (choice on the AMI,Hardware,Key name)
+
+resource "aws_instance" "web_server"{
+ami ="ami-0bcf5425cdc1d8a85"
+instance_type ="t2.micro"
+key_name="prakash"
+tags={
+name="terraform-create"
+}
+}
+output "public-ip"{
+value = "${aws_instance.web_server.public_ip}"
+}
+output "private-ip"{
+value = "${aws_instance.web_server.private_ip}"
+}
+output "password"{
+value = "${aws_instance.web_server.password_data}"
+}
+------------------------------------------------------------------------------
+
+Output code:  refer this URL : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+
+
+I want ot public IP add means: 
+
+output "public-ip"{
+value = "${aws_instance.web_server.public_ip}"
+}
+
+I want ot Private IP add means:
+
+output "private-ip"{
+value = "${aws_instance.web_server.private_ip}"
+}
+
+I want ot password data add means:
+
+output "password"{
+value = "${aws_instance.web_server.password_data}"
+}
+
+
+----------------------------------------------------------------
+
+
+Provide code (security purpose, region): 
+
+provider "aws"{
+region ="ap-south-1"
+access_key="AKIAQGNJSDK2BGLRSD4N"
+secret_key="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"
+}
+
+------------------------------------------------------------------
+
+Terraform installtion code:
+
+yum install wget unzip
+https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+unzip ./terraform_0.12.2_linux_amd64.zip –d /usr/local/bin
+
+
+terraform code: 
+
+terraform init --- 1st time download to provider plugins
+terraform plan----dry run
+terraform apply---action 
+terraform -v-------- findout the terraform version

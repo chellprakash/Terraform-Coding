@@ -1,0 +1,38 @@
+Multiable region added :
+----------------------------------------------------------------
+Main.tf code:
+
+provider "aws"{
+region =var.region
+}
+resource "aws_instance" "demo-server"{
+ami =lookup(var.ami, var.region)
+instance_type = var.instancetype["prod"]
+tags{
+Name="modelexamble"
+}
+}
+
+-----------------------------------------------------------
+Variable.tf
+
+variable "region"{}
+variable "instancetype"{
+type=map
+default ={
+dev ="t2.micro"
+prod="t3.micro"
+}
+}
+----------------------------------------------------------------
+variable "ami"{
+type =map
+default={
+us-east-1="ami-0742b4e673072066f"
+ap-south-1="ami-0bcf5425cdc1d8a85"
+}
+}
+
+---------------------------------------------------------------------
+Question :  
+	No mention the access key & secret key values in the program level so how to run this code?

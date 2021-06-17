@@ -1,0 +1,27 @@
+
+Provider Code:
+
+provider "AWS"{
+region ="${var.region}"
+access_key="${var.access_key}
+secret_key="${var.secret_key}"
+}
+
+
+variable code:
+	
+variable "access_key" {}
+variable "secret_key" {}
+variable "region" {
+default ="ap-south-1"
+}
+variable "private_key_path"{
+default ="prakash.pem"
+}
+variable "ami_id"{
+type="map"
+default ={
+ap-south-1b="ami-0bcf5425cdc1d8a85"
+}
+}
+

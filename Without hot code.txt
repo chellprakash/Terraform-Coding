@@ -1,0 +1,32 @@
+Variables code: 
+
+Without Hot code (not provide the access KEY & secret key value directly) because due to restrictions: 
+--------------------------------------------------------------------
+Main.tf ---(same code)
+
+resource "aws_instance" "web_server"{
+ami ="ami-0bcf5425cdc1d8a85"
+instance_type ="t2.micro"
+key_name="prakash"
+tags={
+name="terraform-create"
+}
+}
+------------------------------------------------------------------
+provide.tf code:
+
+provider "aws"{
+region ="ap-south-1"
+access_key="${var.access_key}"
+secret_key="${var.secret_key}"
+}
+-----------------------------------------------------------
+
+Variable.tf code:
+
+variable "aws_access_key"{}
+variable "aws_secret_key"{}
+variable "region"{
+default="
+----------------------------------------------------------------
+NOTE:  Manual work is very hevay due to each an every time its asking access key & secret key 

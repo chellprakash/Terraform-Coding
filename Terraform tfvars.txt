@@ -1,0 +1,38 @@
+NOte: we are storing the access &secret key values in the any other local path and finally mapped to the terraform apply timing )
+-----------------------------------------------------------------------------------------------
+terraform.tfvars code: (unable to showing access & secret key)
+ 
+aws_access_key="AKIAQGNJSDK2BGLRSD4N"
+aws_secret_key="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"
+------------------------------------------------------------------------------------------
+Main.tf code:
+
+
+resource "aws_instance" "web_server"{
+ami ="ami-0bcf5425cdc1d8a85"
+instance_type ="t2.micro"
+key_name="prakash"
+tags={
+name="create"
+}
+}
+---------------------------------------------------------------------------------------------
+provider.tf code:
+
+provider "aws"{
+
+access_key = "${var.aws_access_key}"
+secret_key = "${var.aws_secret_key}"
+region ="${var.region}"
+}
+----------------------------------------------------------------------------------------------------
+variable.tf code:
+
+variable"aws_access_key"{}
+variable "aws_secret_key"{}
+variable "region" {
+default = "ap-south-1"
+}
+--------------------------------------------------------------------------------------------------------
+Question : where to store the access & secret Key values inside the codeing folder or outside the folder 
+			how to store the local path?

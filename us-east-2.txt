@@ -1,0 +1,21 @@
+Region :  us-east-2
+
+
+main.tf:
+
+resource "aws_instance" "web_server"{
+ami ="ami-05d72852800cbf29e"
+instance_type ="t2.micro"
+key_name="prakash1"
+}
+
+
+provider.tf: 
+
+provider "aws"{
+region ="us-east-2"
+access_key="AKIAQGNJSDK2BGLRSD4N"
+secret_key="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"
+}
+
+

@@ -1,0 +1,52 @@
+automate create the server coding:
+-----------------------------------------------------------------------------
+resource "aws_instance" web_server"{
+ami = "${lookup(var.ami_id,var.region)}"
+instance_type ="t2.micro"
+key_name = "prakash"
+
+provisioner "file"{
+source = "index.html"
+destination = "/tmp/index.html"
+}
+
+provisioner "remote-exec"{
+inline = [
+"sudo yum install -y httpd;sudo cp /tmp/index.html /var/www/html/",
+"sudo service httpd restart",
+"sudo service httpd status"
+]
+}
+connection {
+user = "ec2-user"
+private_key = "${file("${var.private_key_path})}"
+host = "${aws_instance.web_server.public_ip}"
+}
+}
+-----------------------------------------------------------------------------
+variable code:
+
+variable "access_key" {}
+variable "secret_key"{}
+variable "region" {
+default = "ap-south-1"
+}
+variable"private_key_path"{
+default = "prakash.pem"
+}
+variable "ami_id{
+type = "map"
+default = {
+us-east-1 = "ami-0742b4e673072066f"
+ap-south-1 = "ami-0bcf5425cdc1d8a85"
+}
+}
+-------------------------------------------------------------------
+
+provider code:
+
+provider "aws" {
+region = "${var.region}"
+access_key = "${var.access_key}"
+secret_key = "${var.secret_key}"
+}
